@@ -112,7 +112,7 @@ Plugins/extensions are part of OpenClaw's trusted computing base for a gateway.
 - Using OpenClaw in ways that the docs recommend not to
 - Deployments where mutually untrusted/adversarial operators share one gateway host and config (for example, reports expecting per-operator isolation for `sessions.list`, `sessions.preview`, `chat.history`, or similar control-plane reads)
 - Prompt-injection-only attacks (without a policy/auth/sandbox boundary bypass)
-- Reports that require write access to trusted local state (`~/.openclaw`, workspace files like `MEMORY.md` / `memory/*.md`)
+- Reports that require write access to trusted local state (`~/.quantumcortex`, workspace files like `MEMORY.md` / `memory/*.md`)
 - Reports where exploitability depends on attacker-controlled pre-existing symlink/hardlink filesystem state in trusted local paths (for example extraction/install target trees) unless a separate untrusted boundary bypass is shown that creates that state.
 - Reports where the only demonstrated impact is an already-authorized sender intentionally invoking a local-action command (for example `/export-session` writing to an absolute host path) without bypassing auth, sandbox, or another documented boundary
 - Reports where the only claim is that a trusted-installed/enabled plugin can execute with gateway/host privileges (documented trust model behavior).
@@ -128,7 +128,7 @@ Plugins/extensions are part of OpenClaw's trusted computing base for a gateway.
 OpenClaw security guidance assumes:
 
 - The host where OpenClaw runs is within a trusted OS/admin boundary.
-- Anyone who can modify `~/.openclaw` state/config (including `openclaw.json`) is effectively a trusted operator.
+- Anyone who can modify `~/.quantumcortex` state/config (including `openclaw.json`) is effectively a trusted operator.
 - A single Gateway shared by mutually untrusted people is **not a recommended setup**. Use separate gateways (or at minimum separate OS users/hosts) per trust boundary.
 - Authenticated Gateway callers are treated as trusted operators. Session identifiers (for example `sessionKey`) are routing controls, not per-user authorization boundaries.
 - Multiple gateway instances can run on one machine, but the recommended model is clean per-user isolation (prefer one host/VPS per user).

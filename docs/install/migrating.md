@@ -12,8 +12,8 @@ This guide migrates a OpenClaw Gateway from one machine to another **without red
 
 The migration is simple conceptually:
 
-- Copy the **state directory** (`$OPENCLAW_STATE_DIR`, default: `~/.openclaw/`) — this includes config, auth, sessions, and channel state.
-- Copy your **workspace** (`~/.openclaw/workspace/` by default) — this includes your agent files (memory, prompts, etc.).
+- Copy the **state directory** (`$OPENCLAW_STATE_DIR`, default: `~/.quantumcortex/`) — this includes config, auth, sessions, and channel state.
+- Copy your **workspace** (`~/.quantumcortex/workspace/` by default) — this includes your agent files (memory, prompts, etc.).
 
 But there are common footguns around **profiles**, **permissions**, and **partial copies**.
 
@@ -23,11 +23,11 @@ But there are common footguns around **profiles**, **permissions**, and **partia
 
 Most installs use the default:
 
-- **State dir:** `~/.openclaw/`
+- **State dir:** `~/.quantumcortex/`
 
 But it may be different if you use:
 
-- `--profile <name>` (often becomes `~/.openclaw-<profile>/`)
+- `--profile <name>` (often becomes `~/.quantumcortex-<profile>/`)
 - `OPENCLAW_STATE_DIR=/some/path`
 
 If you’re not sure, run on the **old** machine:
@@ -42,7 +42,7 @@ Look for mentions of `OPENCLAW_STATE_DIR` / profile in the output. If you run mu
 
 Common defaults:
 
-- `~/.openclaw/workspace/` (recommended workspace)
+- `~/.quantumcortex/workspace/` (recommended workspace)
 - a custom folder you created
 
 Your workspace is where files like `MEMORY.md`, `USER.md`, and `memory/*.md` live.
@@ -85,7 +85,7 @@ tar -czf openclaw-state.tgz .openclaw
 tar -czf openclaw-workspace.tgz .openclaw/workspace
 ```
 
-If you have multiple profiles/state dirs (e.g. `~/.openclaw-main`, `~/.openclaw-work`), archive each.
+If you have multiple profiles/state dirs (e.g. `~/.quantumcortex-main`, `~/.quantumcortex-work`), archive each.
 
 ### Step 1 — Install OpenClaw on the new machine
 
@@ -93,14 +93,14 @@ On the **new** machine, install the CLI (and Node if needed):
 
 - See: [Install](/install)
 
-At this stage, it’s OK if onboarding creates a fresh `~/.openclaw/` — you will overwrite it in the next step.
+At this stage, it’s OK if onboarding creates a fresh `~/.quantumcortex/` — you will overwrite it in the next step.
 
 ### Step 2 — Copy the state dir + workspace to the new machine
 
 Copy **both**:
 
-- `$OPENCLAW_STATE_DIR` (default `~/.openclaw/`)
-- your workspace (default `~/.openclaw/workspace/`)
+- `$OPENCLAW_STATE_DIR` (default `~/.quantumcortex/`)
+- your workspace (default `~/.quantumcortex/workspace/`)
 
 Common approaches:
 

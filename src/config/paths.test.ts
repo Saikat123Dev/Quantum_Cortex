@@ -106,7 +106,7 @@ describe("state + config path candidates", () => {
     expect(candidates).toEqual(expected);
   });
 
-  it("prefers ~/.openclaw when it exists and legacy dir is missing", async () => {
+  it("prefers ~/.quantumcortex when it exists and legacy dir is missing", async () => {
     await withTempRoot("openclaw-state-", async (root) => {
       const newDir = path.join(root, ".openclaw");
       await fs.mkdir(newDir, { recursive: true });
@@ -115,7 +115,7 @@ describe("state + config path candidates", () => {
     });
   });
 
-  it("falls back to existing legacy state dir when ~/.openclaw is missing", async () => {
+  it("falls back to existing legacy state dir when ~/.quantumcortex is missing", async () => {
     await withTempRoot("openclaw-state-legacy-", async (root) => {
       const legacyDir = path.join(root, ".clawdbot");
       await fs.mkdir(legacyDir, { recursive: true });

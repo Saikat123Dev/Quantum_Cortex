@@ -138,13 +138,25 @@ describe("jidToE164", () => {
 });
 
 describe("resolveConfigDir", () => {
-  it("prefers ~/.openclaw when legacy dir is missing", async () => {
+  it("prefers ~/.quantumcortex when it exists", async () => {
     const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "openclaw-config-dir-"));
     try {
-      const newDir = path.join(root, ".openclaw");
+      const newDir = path.join(root, ".quantumcortex");
       await fs.promises.mkdir(newDir, { recursive: true });
       const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
       expect(resolved).toBe(newDir);
+    } finally {
+      await fs.promises.rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("falls back to ~/.openclaw as a legacy dir when ~/.quantumcortex is missing", async () => {
+    const root = await fs.promises.mkdtemp(path.join(os.tmpdir(), "openclaw-config-dir-"));
+    try {
+      const legacyDir = path.join(root, ".openclaw");
+      await fs.promises.mkdir(legacyDir, { recursive: true });
+      const resolved = resolveConfigDir({} as NodeJS.ProcessEnv, () => root);
+      expect(resolved).toBe(legacyDir);
     } finally {
       await fs.promises.rm(root, { recursive: true, force: true });
     }
@@ -167,9 +179,9 @@ describe("shortenHomePath", () => {
     vi.stubEnv("OPENCLAW_HOME", "/srv/openclaw-home");
     vi.stubEnv("HOME", "/home/other");
 
-    expect(shortenHomePath(`${path.resolve("/srv/openclaw-home")}/.openclaw/openclaw.json`)).toBe(
-      "$OPENCLAW_HOME/.openclaw/openclaw.json",
-    );
+    expect(
+      shortenHomePath(`${path.resolve("/srv/openclaw-home")}/.quantumcortex/openclaw.json`),
+    ).toBe("$OPENCLAW_HOME/.quantumcortex/openclaw.json");
 
     vi.unstubAllEnvs();
   });
@@ -181,8 +193,10 @@ describe("shortenHomeInString", () => {
     vi.stubEnv("HOME", "/home/other");
 
     expect(
-      shortenHomeInString(`config: ${path.resolve("/srv/openclaw-home")}/.openclaw/openclaw.json`),
-    ).toBe("config: $OPENCLAW_HOME/.openclaw/openclaw.json");
+      shortenHomeInString(
+        `config: ${path.resolve("/srv/openclaw-home")}/.quantumcortex/openclaw.json`,
+      ),
+    ).toBe("config: $OPENCLAW_HOME/.quantumcortex/openclaw.json");
 
     vi.unstubAllEnvs();
   });

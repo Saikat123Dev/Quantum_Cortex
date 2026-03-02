@@ -19,7 +19,7 @@ NO_SIGN=0
 SIGN=0
 AUTO_DETECT_SIGNING=1
 GATEWAY_WAIT_SECONDS="${OPENCLAW_GATEWAY_WAIT_SECONDS:-0}"
-LAUNCHAGENT_DISABLE_MARKER="${HOME}/.openclaw/disable-launchagent"
+LAUNCHAGENT_DISABLE_MARKER="${HOME}/.quantumcortex/disable-launchagent"
 ATTACH_ONLY=1
 
 log()  { printf '%s\n' "$*"; }
@@ -100,7 +100,7 @@ for arg in "$@"; do
       log "  node openclaw.mjs daemon restart"
       log ""
       log "Reset unsigned overrides:"
-      log "  rm ~/.openclaw/disable-launchagent"
+      log "  rm ~/.quantumcortex/disable-launchagent"
       log ""
       log "Default behavior: Auto-detect signing keys, fallback to --no-sign if none found"
       exit 0
@@ -173,7 +173,7 @@ fi
 if [ "$NO_SIGN" -eq 1 ]; then
   export ALLOW_ADHOC_SIGNING=1
   export SIGN_IDENTITY="-"
-  mkdir -p "${HOME}/.openclaw"
+  mkdir -p "${HOME}/.quantumcortex"
   run_step "disable launchagent writes" /usr/bin/touch "${LAUNCHAGENT_DISABLE_MARKER}"
 elif [ "$SIGN" -eq 1 ]; then
   if ! check_signing_keys; then

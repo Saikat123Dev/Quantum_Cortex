@@ -23,9 +23,9 @@ echo "Running plugins Docker E2E..."
 
 	  home_dir=$(mktemp -d "/tmp/openclaw-plugins-e2e.XXXXXX")
 	  export HOME="$home_dir"
-  mkdir -p "$HOME/.openclaw/extensions/demo-plugin"
+  mkdir -p "$HOME/.quantumcortex/extensions/demo-plugin"
 
-  cat > "$HOME/.openclaw/extensions/demo-plugin/index.js" <<'"'"'JS'"'"'
+  cat > "$HOME/.quantumcortex/extensions/demo-plugin/index.js" <<'"'"'JS'"'"'
 module.exports = {
   id: "demo-plugin",
   name: "Demo Plugin",
@@ -38,7 +38,7 @@ module.exports = {
   },
 };
 JS
-  cat > "$HOME/.openclaw/extensions/demo-plugin/openclaw.plugin.json" <<'"'"'JSON'"'"'
+  cat > "$HOME/.quantumcortex/extensions/demo-plugin/openclaw.plugin.json" <<'"'"'JSON'"'"'
 {
   "id": "demo-plugin",
   "configSchema": {

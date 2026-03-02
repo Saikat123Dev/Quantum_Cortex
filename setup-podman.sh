@@ -162,7 +162,7 @@ fi
 
 OPENCLAW_HOME="$(resolve_user_home "$OPENCLAW_USER")"
 OPENCLAW_UID="$(id -u "$OPENCLAW_USER" 2>/dev/null || true)"
-OPENCLAW_CONFIG="$OPENCLAW_HOME/.openclaw"
+OPENCLAW_CONFIG="$OPENCLAW_HOME/.quantumcortex"
 LAUNCH_SCRIPT_DST="$OPENCLAW_HOME/run-openclaw-podman.sh"
 
 # Prefer systemd user services (Quadlet) for production. Enable lingering early so rootless Podman can run

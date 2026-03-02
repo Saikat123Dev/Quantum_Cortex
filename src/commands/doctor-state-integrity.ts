@@ -498,8 +498,8 @@ export async function noteStateIntegrity(
       [
         `- State directory is under macOS cloud-synced storage (${displayStateDir}; ${cloudSyncedStateDir.storage}).`,
         "- This can cause slow I/O and sync/lock races for sessions and credentials.",
-        "- Prefer a local non-synced state dir (for example: ~/.openclaw).",
-        `  Set locally: OPENCLAW_STATE_DIR=~/.openclaw ${formatCliCommand("openclaw doctor")}`,
+        "- Prefer a local non-synced state dir (for example: ~/.quantumcortex).",
+        `  Set locally: OPENCLAW_STATE_DIR=~/.quantumcortex ${formatCliCommand("openclaw doctor")}`,
       ].join("\n"),
     );
   }
@@ -817,7 +817,7 @@ export function noteWorkspaceBackupTip(workspaceDir: string) {
   note(
     [
       "- Tip: back up the workspace in a private git repo (GitHub or GitLab).",
-      "- Keep ~/.openclaw out of git; it contains credentials and session history.",
+      "- Keep ~/.quantumcortex out of git; it contains credentials and session history.",
       "- Details: /concepts/agent-workspace#git-backup-recommended",
     ].join("\n"),
     "Workspace",

@@ -77,6 +77,52 @@ function stringifyToolPayload(payload: unknown): string {
   return String(payload);
 }
 
+function extractToolPathParam(params: unknown): string | null {
+  if (!isPlainObject(params)) {
+    return null;
+  }
+  const direct = typeof params.path === "string" ? params.path : undefined;
+  if (direct && direct.trim().length > 0) {
+    return direct.trim();
+  }
+  const alias = typeof params.file_path === "string" ? params.file_path : undefined;
+  if (alias && alias.trim().length > 0) {
+    return alias.trim();
+  }
+  return null;
+}
+
+function normalizePathForMatching(filePath: string): string {
+  return filePath.replaceAll("\\", "/").replace(/\/+/g, "/");
+}
+
+function isOptionalMemoryPath(filePath: string): boolean {
+  const normalized = normalizePathForMatching(filePath);
+  const lower = normalized.toLowerCase();
+  if (lower === "memory.md" || lower.endsWith("/memory.md")) {
+    return true;
+  }
+  return /(^|\/)memory\/.+\.md$/i.test(normalized);
+}
+
+function shouldDowngradeToolErrorLog(params: {
+  toolName: string;
+  message: string;
+  toolParams: unknown;
+}): boolean {
+  if (params.toolName !== "read") {
+    return false;
+  }
+  if (!/\benoent\b/i.test(params.message)) {
+    return false;
+  }
+  const filePath = extractToolPathParam(params.toolParams);
+  if (!filePath) {
+    return false;
+  }
+  return isOptionalMemoryPath(filePath);
+}
+
 function normalizeToolExecutionResult(params: {
   toolName: string;
   result: unknown;
@@ -208,7 +254,19 @@ export function toToolDefinitions(tools: AnyAgentTool[]): ToolDefinition[] {
           if (described.stack && described.stack !== described.message) {
             logDebug(`tools: ${normalizedName} failed stack:\n${described.stack}`);
           }
-          logError(`[tools] ${normalizedName} failed: ${described.message}`);
+          if (
+            shouldDowngradeToolErrorLog({
+              toolName: normalizedName,
+              message: described.message,
+              toolParams: executeParams,
+            })
+          ) {
+            logDebug(
+              `[tools] ${normalizedName} optional memory read missing: ${described.message}`,
+            );
+          } else {
+            logError(`[tools] ${normalizedName} failed: ${described.message}`);
+          }
 
           const errorResult = jsonResult({
             status: "error",

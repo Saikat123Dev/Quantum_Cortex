@@ -43,9 +43,9 @@ The hooks system allows you to:
 
 OpenClaw ships with four bundled hooks that are automatically discovered:
 
-- **💾 session-memory**: Saves session context to your agent workspace (default `~/.openclaw/workspace/memory/`) when you issue `/new`
+- **💾 session-memory**: Saves session context to your agent workspace (default `~/.quantumcortex/workspace/memory/`) when you issue `/new`
 - **📎 bootstrap-extra-files**: Injects additional workspace bootstrap files from configured glob/path patterns during `agent:bootstrap`
-- **📝 command-logger**: Logs all command events to `~/.openclaw/logs/commands.log`
+- **📝 command-logger**: Logs all command events to `~/.quantumcortex/logs/commands.log`
 - **🚀 boot-md**: Runs `BOOT.md` when the gateway starts (requires internal hooks enabled)
 
 List available hooks:
@@ -81,7 +81,7 @@ During onboarding (`openclaw onboard`), you'll be prompted to enable recommended
 Hooks are automatically discovered from three directories (in order of precedence):
 
 1. **Workspace hooks**: `<workspace>/hooks/` (per-agent, highest precedence)
-2. **Managed hooks**: `~/.openclaw/hooks/` (user-installed, shared across workspaces)
+2. **Managed hooks**: `~/.quantumcortex/hooks/` (user-installed, shared across workspaces)
 3. **Bundled hooks**: `<openclaw>/dist/hooks/bundled/` (shipped with OpenClaw)
 
 Managed hook directories can be either a **single hook** or a **hook pack** (package directory).
@@ -118,7 +118,7 @@ Example `package.json`:
 ```
 
 Each entry points to a hook directory containing `HOOK.md` and `handler.ts` (or `index.ts`).
-Hook packs can ship dependencies; they will be installed under `~/.openclaw/hooks/<id>`.
+Hook packs can ship dependencies; they will be installed under `~/.quantumcortex/hooks/<id>`.
 Each `openclaw.hooks` entry must stay inside the package directory after symlink
 resolution; entries that escape are rejected.
 
@@ -338,13 +338,13 @@ Planned event types:
 ### 1. Choose Location
 
 - **Workspace hooks** (`<workspace>/hooks/`): Per-agent, highest precedence
-- **Managed hooks** (`~/.openclaw/hooks/`): Shared across workspaces
+- **Managed hooks** (`~/.quantumcortex/hooks/`): Shared across workspaces
 
 ### 2. Create Directory Structure
 
 ```bash
-mkdir -p ~/.openclaw/hooks/my-hook
-cd ~/.openclaw/hooks/my-hook
+mkdir -p ~/.quantumcortex/hooks/my-hook
+cd ~/.quantumcortex/hooks/my-hook
 ```
 
 ### 3. Create HOOK.md
@@ -531,7 +531,7 @@ Saves session context to memory when you issue `/new`.
 
 **Requirements**: `workspace.dir` must be configured
 
-**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/.openclaw/workspace`)
+**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/.quantumcortex/workspace`)
 
 **What it does**:
 
@@ -611,7 +611,7 @@ Logs all command events to a centralized audit file.
 
 **Requirements**: None
 
-**Output**: `~/.openclaw/logs/commands.log`
+**Output**: `~/.quantumcortex/logs/commands.log`
 
 **What it does**:
 
@@ -630,13 +630,13 @@ Logs all command events to a centralized audit file.
 
 ```bash
 # View recent commands
-tail -n 20 ~/.openclaw/logs/commands.log
+tail -n 20 ~/.quantumcortex/logs/commands.log
 
 # Pretty-print with jq
-cat ~/.openclaw/logs/commands.log | jq .
+cat ~/.quantumcortex/logs/commands.log | jq .
 
 # Filter by action
-grep '"action":"new"' ~/.openclaw/logs/commands.log | jq .
+grep '"action":"new"' ~/.quantumcortex/logs/commands.log | jq .
 ```
 
 **Enable**:
@@ -782,7 +782,7 @@ Monitor gateway logs to see hook execution:
 ./scripts/clawlog.sh -f
 
 # Other platforms
-tail -f ~/.openclaw/gateway.log
+tail -f ~/.quantumcortex/gateway.log
 ```
 
 ### Test Hooks Directly
@@ -862,14 +862,14 @@ Session reset
 1. Check directory structure:
 
    ```bash
-   ls -la ~/.openclaw/hooks/my-hook/
+   ls -la ~/.quantumcortex/hooks/my-hook/
    # Should show: HOOK.md, handler.ts
    ```
 
 2. Verify HOOK.md format:
 
    ```bash
-   cat ~/.openclaw/hooks/my-hook/HOOK.md
+   cat ~/.quantumcortex/hooks/my-hook/HOOK.md
    # Should have YAML frontmatter with name and metadata
    ```
 
@@ -947,8 +947,8 @@ node -e "import('./path/to/handler.ts').then(console.log)"
 1. Create hook directory:
 
    ```bash
-   mkdir -p ~/.openclaw/hooks/my-hook
-   mv ./hooks/handlers/my-handler.ts ~/.openclaw/hooks/my-hook/handler.ts
+   mkdir -p ~/.quantumcortex/hooks/my-hook
+   mv ./hooks/handlers/my-handler.ts ~/.quantumcortex/hooks/my-hook/handler.ts
    ```
 
 2. Create HOOK.md:
