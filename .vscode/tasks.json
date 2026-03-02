@@ -1,0 +1,142 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build UI",
+      "type": "shell",
+      "command": "node scripts/ui.js build",
+      "group": "build"
+    },
+    {
+      "label": "Build UI (quantumcortex dir)",
+      "type": "shell",
+      "command": "node scripts/ui.js build",
+      "group": "build"
+    },
+    {
+      "label": "Install quantum-cortex-better-gateway",
+      "type": "shell",
+      "command": "pnpm add @quantumhashcorporation/quantum-cortex-better-gateway && echo DONE"
+    },
+    {
+      "label": "Install quantum-cortex-better-gateway (workspace root)",
+      "type": "shell",
+      "command": "pnpm add -w @quantumhashcorporation/quantum-cortex-better-gateway && echo '---DONE---'"
+    },
+    {
+      "label": "Find installed package",
+      "type": "shell",
+      "command": "find /home/saikat/workspce/internship/Quantum_Cortex/node_modules/.pnpm -name 'quantum-cortex-better-gateway' -type d 2>/dev/null | head -5 && ls /home/saikat/workspce/internship/Quantum_Cortex/node_modules/@quantumhashcorporation/ 2>/dev/null"
+    },
+    {
+      "label": "Read package.json of new package",
+      "type": "shell",
+      "command": "cat /home/saikat/workspce/internship/Quantum_Cortex/node_modules/@quantumhashcorporation/quantum-cortex-better-gateway/package.json"
+    },
+    {
+      "label": "Read package.json of new package (full)",
+      "type": "shell",
+      "command": "cat /home/saikat/workspce/internship/Quantum_Cortex/node_modules/@quantumhashcorporation/quantum-cortex-better-gateway/package.json | head -60"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins install @quantumhashcorporation/quantum-cortex-better-gateway 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin (retry)",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins install @quantumhashcorporation/quantum-cortex-better-gateway 2>&1"
+    },
+    {
+      "label": "Verify plugin registered",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1 | grep -A5 'better-gateway\\|Quantum'"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins install @quantumhashcorporation/quantum-cortex-better-gateway 2>&1"
+    },
+    {
+      "label": "Verify plugin registered",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1 | grep -A5 'better-gateway\\|Quantum'"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin (retry)",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1 | tail -40"
+    },
+    {
+      "label": "Verify plugin registered",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1 | grep -A5 'Quantum\\|better-gateway\\|Better'"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin (retry)",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Verify plugin registered",
+      "type": "shell",
+      "command": "node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Build UI",
+      "type": "shell",
+      "command": "pnpm build 2>&1 | tail -5 && node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Build UI",
+      "type": "shell",
+      "command": "pnpm build 2>&1 | tail -5 && node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Build UI (quantumcortex dir)",
+      "type": "shell",
+      "command": "cd /home/saikat/workspce/internship/Quantum_Cortex && pnpm build 2>&1 | tail -3 && echo '==PLUGINS==' && node scripts/run-node.mjs plugins list 2>&1"
+    },
+    {
+      "label": "Register better-gateway plugin",
+      "type": "shell",
+      "command": "OPENCLAW_FORCE_BUILD=1 node scripts/run-node.mjs plugins list 2>&1; echo EXIT:$?"
+    },
+    {
+      "label": "Find installed package",
+      "type": "shell",
+      "command": "node openclaw.mjs plugins list 2>&1; echo EXIT_CODE:$?"
+    }
+  ]
+}

@@ -209,7 +209,7 @@ function onRelayClosed(reason) {
       setBadge(tabId, 'connecting')
       void chrome.action.setTitle({
         tabId,
-        title: 'OpenClaw Browser Relay: relay reconnecting…',
+        title: 'Quantum_Cortex Browser Relay: relay reconnecting…',
       })
     }
   }
@@ -271,7 +271,7 @@ async function reannounceAttachedTabs() {
       setBadge(tabId, 'off')
       void chrome.action.setTitle({
         tabId,
-        title: 'OpenClaw Browser Relay (click to attach/detach)',
+        title: 'Quantum_Cortex Browser Relay (click to attach/detach)',
       })
       continue
     }
@@ -298,7 +298,7 @@ async function reannounceAttachedTabs() {
       setBadge(tabId, 'on')
       void chrome.action.setTitle({
         tabId,
-        title: 'OpenClaw Browser Relay: attached (click to detach)',
+        title: 'Quantum_Cortex Browser Relay: attached (click to detach)',
       })
     } catch {
       setBadge(tabId, 'on')
@@ -474,7 +474,7 @@ async function attachTab(tabId, opts = {}) {
   tabBySession.set(sessionId, tabId)
   void chrome.action.setTitle({
     tabId,
-    title: 'OpenClaw Browser Relay: attached (click to detach)',
+    title: 'Quantum_Cortex Browser Relay: attached (click to detach)',
   })
 
   if (!opts.skipAttachedEvent) {
@@ -545,7 +545,7 @@ async function detachTab(tabId, reason) {
   setBadge(tabId, 'off')
   void chrome.action.setTitle({
     tabId,
-    title: 'OpenClaw Browser Relay (click to attach/detach)',
+    title: 'Quantum_Cortex Browser Relay (click to attach/detach)',
   })
 
   await persistState()
@@ -566,7 +566,7 @@ async function connectOrToggleForActiveTab() {
       setBadge(tabId, 'off')
       void chrome.action.setTitle({
         tabId,
-        title: 'OpenClaw Browser Relay (click to attach/detach)',
+        title: 'Quantum_Cortex Browser Relay (click to attach/detach)',
       })
       return
     }
@@ -584,7 +584,7 @@ async function connectOrToggleForActiveTab() {
     setBadge(tabId, 'connecting')
     void chrome.action.setTitle({
       tabId,
-      title: 'OpenClaw Browser Relay: connecting to local relay…',
+      title: 'Quantum_Cortex Browser Relay: connecting to local relay…',
     })
 
     try {
@@ -595,7 +595,7 @@ async function connectOrToggleForActiveTab() {
       setBadge(tabId, 'error')
       void chrome.action.setTitle({
         tabId,
-        title: 'OpenClaw Browser Relay: relay not running (open options for setup)',
+        title: 'Quantum_Cortex Browser Relay: relay not running (open options for setup)',
       })
       void maybeOpenHelpOnce()
       const message = err instanceof Error ? err.message : String(err)
@@ -766,7 +766,7 @@ async function onDebuggerDetach(source, reason) {
   setBadge(tabId, 'connecting')
   void chrome.action.setTitle({
     tabId,
-    title: 'OpenClaw Browser Relay: re-attaching after navigation…',
+    title: 'Quantum_Cortex Browser Relay: re-attaching after navigation…',
   })
 
   const delays = [300, 700, 1500]
@@ -788,7 +788,7 @@ async function onDebuggerDetach(source, reason) {
       setBadge(tabId, 'error')
       void chrome.action.setTitle({
         tabId,
-        title: 'OpenClaw Browser Relay: relay disconnected during re-attach',
+        title: 'Quantum_Cortex Browser Relay: relay disconnected during re-attach',
       })
       return
     }
@@ -806,7 +806,7 @@ async function onDebuggerDetach(source, reason) {
   setBadge(tabId, 'off')
   void chrome.action.setTitle({
     tabId,
-    title: 'OpenClaw Browser Relay: re-attach failed (click to retry)',
+    title: 'Quantum_Cortex Browser Relay: re-attach failed (click to retry)',
   })
 }
 

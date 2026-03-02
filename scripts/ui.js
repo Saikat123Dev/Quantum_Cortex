@@ -160,7 +160,12 @@ function resolveScriptAction(action) {
 }
 
 export function main(argv = process.argv.slice(2)) {
-  const [action, ...rest] = argv;
+  // Strip shell-style comments (args starting with '#') so that commands like
+  // `pnpm ui:build # auto-installs UI deps on first run` work correctly in
+  // non-interactive shells where '#' is not treated as a comment character.
+  const commentIdx = argv.findIndex((a) => a.startsWith("#"));
+  const cleanArgv = commentIdx === -1 ? argv : argv.slice(0, commentIdx);
+  const [action, ...rest] = cleanArgv;
   if (!action) {
     usage();
     process.exit(2);

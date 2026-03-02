@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { MANIFEST_KEY } from "../compat/legacy-names.js";
+import { LEGACY_MANIFEST_KEYS, MANIFEST_KEY } from "../compat/legacy-names.js";
 import { fileExists, readJsonFile, resolveArchiveKind } from "../infra/archive.js";
 import { resolveExistingInstallPath, withExtractedArchiveRoot } from "../infra/install-flow.js";
 import {
@@ -37,7 +37,9 @@ type PackageManifest = {
   name?: string;
   version?: string;
   dependencies?: Record<string, string>;
-} & Partial<Record<typeof MANIFEST_KEY, { extensions?: string[] }>>;
+} & Partial<
+  Record<typeof MANIFEST_KEY | (typeof LEGACY_MANIFEST_KEYS)[number], { extensions?: string[] }>
+>;
 
 export type InstallPluginResult =
   | {
@@ -78,7 +80,16 @@ function validatePluginId(pluginId: string): string | null {
 }
 
 async function ensureOpenClawExtensions(manifest: PackageManifest) {
-  const extensions = manifest[MANIFEST_KEY]?.extensions;
+  // Check canonical key first, then any recognised alternate keys (e.g. "Quantum_Cortex").
+  const allKeys = [MANIFEST_KEY, ...LEGACY_MANIFEST_KEYS] as const;
+  let extensions: unknown;
+  for (const key of allKeys) {
+    extensions = (manifest as Record<string, { extensions?: unknown } | undefined>)[key]
+      ?.extensions;
+    if (extensions !== undefined) {
+      break;
+    }
+  }
   if (!Array.isArray(extensions)) {
     throw new Error("package.json missing openclaw.extensions");
   }
