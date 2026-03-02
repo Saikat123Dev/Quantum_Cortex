@@ -14,7 +14,8 @@
     "url": "git+https://github.com/openclaw/openclaw.git"
   },
   "bin": {
-    "openclaw": "openclaw.mjs"
+    "openclaw": "openclaw.mjs",
+    "quantumcortex": "openclaw.mjs"
   },
   "directories": {
     "doc": "docs",
@@ -119,6 +120,8 @@
     "protocol:check": "pnpm protocol:gen && pnpm protocol:gen:swift && git diff --exit-code -- dist/protocol.schema.json apps/macos/Sources/OpenClawProtocol/GatewayModels.swift",
     "protocol:gen": "node --import tsx scripts/protocol-gen.ts",
     "protocol:gen:swift": "node --import tsx scripts/protocol-gen-swift.ts",
+    "quantumcortex": "node scripts/run-node.mjs",
+    "quantumcortex:rpc": "node scripts/run-node.mjs agent --mode rpc --json",
     "release:check": "node --import tsx scripts/release-check.ts",
     "start": "node scripts/run-node.mjs",
     "test": "node scripts/test-parallel.mjs",
@@ -172,6 +175,7 @@
     "@mariozechner/pi-coding-agent": "0.55.3",
     "@mariozechner/pi-tui": "0.55.3",
     "@mozilla/readability": "^0.6.0",
+    "@quantumhashcorporation/quantum-cortex-better-gateway": "^1.2.5",
     "@sinclair/typebox": "0.34.48",
     "@slack/bolt": "^4.6.0",
     "@slack/web-api": "^7.14.1",

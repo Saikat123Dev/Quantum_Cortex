@@ -86,7 +86,7 @@ Define providers under `secrets.providers`:
       default: { source: "env" },
       filemain: {
         source: "file",
-        path: "~/.openclaw/secrets.json",
+        path: "~/.quantumcortex/secrets.json",
         mode: "json", // or "singleValue"
       },
       vault: {
@@ -244,7 +244,7 @@ Optional per-id errors:
 
 ## In-scope fields (v1)
 
-### `~/.openclaw/openclaw.json`
+### `~/.quantumcortex/openclaw.json`
 
 - `models.providers.<provider>.apiKey`
 - `skills.entries.<skillKey>.apiKey`
@@ -253,7 +253,7 @@ Optional per-id errors:
 - `channels.googlechat.accounts.<accountId>.serviceAccount`
 - `channels.googlechat.accounts.<accountId>.serviceAccountRef`
 
-### `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+### `~/.quantumcortex/agents/<agentId>/agent/auth-profiles.json`
 
 - `profiles.<profileId>.keyRef` for `type: "api_key"`
 - `profiles.<profileId>.tokenRef` for `type: "token"`

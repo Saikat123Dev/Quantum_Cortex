@@ -9,7 +9,7 @@ title: "Broadcast Groups"
 
 # Broadcast Groups
 
-**Status:** Experimental  
+**Status:** Experimental
 **Version:** Added in 2026.1.9
 
 ## Overview
@@ -219,7 +219,7 @@ Design each agent with a single, clear responsibility:
 }
 ```
 
-✅ **Good:** Each agent has one job  
+✅ **Good:** Each agent has one job
 ❌ **Bad:** One generic "dev-helper" agent
 
 ### 2. Use Descriptive Names
@@ -317,7 +317,7 @@ Broadcast groups work alongside existing routing:
 **Debug:**
 
 ```bash
-tail -f ~/.openclaw/logs/gateway.log | grep broadcast
+tail -f ~/.quantumcortex/logs/gateway.log | grep broadcast
 ```
 
 ### Only One Agent Responding
@@ -372,7 +372,7 @@ tail -f ~/.openclaw/logs/gateway.log | grep broadcast
 }
 ```
 
-**User sends:** Code snippet  
+**User sends:** Code snippet
 **Responses:**
 
 - code-formatter: "Fixed indentation and added type hints"

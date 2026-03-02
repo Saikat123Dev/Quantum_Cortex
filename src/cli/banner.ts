@@ -40,7 +40,7 @@ export function formatCliBannerLine(version: string, options: BannerOptions = {}
   const commitLabel = commit ?? "unknown";
   const tagline = pickTagline(options);
   const rich = options.richTty ?? isRich();
-  const title = "🦞 OpenClaw";
+  const title = "🦞 Quantum_Cortex";
   const prefix = "🦞 ";
   const columns = options.columns ?? process.stdout.columns ?? 120;
   const plainFullLine = `${title} ${version} (${commitLabel}) — ${tagline}`;
@@ -66,12 +66,12 @@ export function formatCliBannerLine(version: string, options: BannerOptions = {}
 }
 
 const LOBSTER_ASCII = [
-  "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄",
-  "██░▄▄▄░██░▄▄░██░▄▄▄██░▀██░██░▄▄▀██░████░▄▄▀██░███░██",
-  "██░███░██░▀▀░██░▄▄▄██░█░█░██░█████░████░▀▀░██░█░█░██",
-  "██░▀▀▀░██░█████░▀▀▀██░██▄░██░▀▀▄██░▀▀░█░██░██▄▀▄▀▄██",
-  "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀",
-  "                  🦞 OPENCLAW 🦞                    ",
+  "╔═══════════════════════════════════════════════════╗",
+  "║                                                   ║",
+  "║       Q U A N T U M _ C O R T E X               ║",
+  "║                                                   ║",
+  "╚═══════════════════════════════════════════════════╝",
+  "                🦞 QUANTUM_CORTEX 🦞                ",
   " ",
 ];
 
@@ -82,24 +82,18 @@ export function formatCliBannerArt(options: BannerOptions = {}): string {
   }
 
   const colorChar = (ch: string) => {
-    if (ch === "█") {
+    if (ch === "╔" || ch === "╚" || ch === "╝" || ch === "╗" || ch === "║" || ch === "═") {
       return theme.accentBright(ch);
-    }
-    if (ch === "░") {
-      return theme.accentDim(ch);
-    }
-    if (ch === "▀") {
-      return theme.accent(ch);
     }
     return theme.muted(ch);
   };
 
   const colored = LOBSTER_ASCII.map((line) => {
-    if (line.includes("OPENCLAW")) {
+    if (line.includes("QUANTUM_CORTEX")) {
       return (
-        theme.muted("              ") +
+        theme.muted("            ") +
         theme.accent("🦞") +
-        theme.info(" OPENCLAW ") +
+        theme.info(" QUANTUM_CORTEX ") +
         theme.accent("🦞")
       );
     }

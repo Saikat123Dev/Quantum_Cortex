@@ -94,12 +94,12 @@ If you override any of these in config or env, you must keep them unique per ins
 ## Manual env example
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/main.json \
-OPENCLAW_STATE_DIR=~/.openclaw-main \
+OPENCLAW_CONFIG_PATH=~/.quantumcortex/main.json \
+OPENCLAW_STATE_DIR=~/.quantumcortex-main \
 openclaw gateway --port 18789
 
-OPENCLAW_CONFIG_PATH=~/.openclaw/rescue.json \
-OPENCLAW_STATE_DIR=~/.openclaw-rescue \
+OPENCLAW_CONFIG_PATH=~/.quantumcortex/rescue.json \
+OPENCLAW_STATE_DIR=~/.quantumcortex-rescue \
 openclaw gateway --port 19001
 ```
 

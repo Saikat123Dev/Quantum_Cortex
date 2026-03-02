@@ -1,12 +1,19 @@
 import fs from "node:fs";
 import path from "node:path";
-import { MANIFEST_KEY } from "../compat/legacy-names.js";
+import {
+  LEGACY_MANIFEST_KEYS,
+  LEGACY_PLUGIN_MANIFEST_FILENAMES,
+  MANIFEST_KEY,
+} from "../compat/legacy-names.js";
 import { openBoundaryFileSync } from "../infra/boundary-file-read.js";
 import { isRecord } from "../utils.js";
 import type { PluginConfigUiHint, PluginKind } from "./types.js";
 
 export const PLUGIN_MANIFEST_FILENAME = "openclaw.plugin.json";
-export const PLUGIN_MANIFEST_FILENAMES = [PLUGIN_MANIFEST_FILENAME] as const;
+export const PLUGIN_MANIFEST_FILENAMES = [
+  PLUGIN_MANIFEST_FILENAME,
+  ...LEGACY_PLUGIN_MANIFEST_FILENAMES,
+] as const;
 
 export type PluginManifest = {
   id: string;
@@ -149,12 +156,13 @@ export type OpenClawPackageManifest = {
 };
 
 export type ManifestKey = typeof MANIFEST_KEY;
+export type LegacyManifestKey = (typeof LEGACY_MANIFEST_KEYS)[number];
 
 export type PackageManifest = {
   name?: string;
   version?: string;
   description?: string;
-} & Partial<Record<ManifestKey, OpenClawPackageManifest>>;
+} & Partial<Record<ManifestKey | LegacyManifestKey, OpenClawPackageManifest>>;
 
 export function getPackageManifestMetadata(
   manifest: PackageManifest | undefined,
@@ -162,5 +170,16 @@ export function getPackageManifestMetadata(
   if (!manifest) {
     return undefined;
   }
-  return manifest[MANIFEST_KEY];
+  // Check canonical key first, then alternate keys (e.g. "Quantum_Cortex").
+  const allKeys: ReadonlyArray<ManifestKey | LegacyManifestKey> = [
+    MANIFEST_KEY,
+    ...LEGACY_MANIFEST_KEYS,
+  ];
+  for (const key of allKeys) {
+    const value = (manifest as Partial<Record<string, OpenClawPackageManifest>>)[key];
+    if (value !== undefined) {
+      return value;
+    }
+  }
+  return undefined;
 }

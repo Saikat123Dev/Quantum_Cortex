@@ -1,4 +1,4 @@
-const DEFAULT_TAGLINE = "All your chats, one OpenClaw.";
+const DEFAULT_TAGLINE = "All your chats, one Quantum_Cortex.";
 
 const HOLIDAY_TAGLINES = {
   newYear:
@@ -90,7 +90,7 @@ const TAGLINES: string[] = [
   "Your AI assistant, now without the $3,499 headset.",
   "Think different. Actually think.",
   "Ah, the fruit tree company! 🍎",
-  "Greetings, Professor Falken",
+  "Greetings, Quantumhash Corporation, your one-stop shop for all things bot and automation.",
   HOLIDAY_TAGLINES.newYear,
   HOLIDAY_TAGLINES.lunarNewYear,
   HOLIDAY_TAGLINES.christmas,

@@ -16,7 +16,7 @@ x-i18n:
 
 # 广播群组
 
-**状态：** 实验性功能  
+**状态：** 实验性功能
 **版本：** 于 2026.1.9 版本新增
 
 ## 概述
@@ -226,7 +226,7 @@ Tools: read only
 }
 ```
 
-✅ **好的做法：** 每个智能体只有一个任务  
+✅ **好的做法：** 每个智能体只有一个任务
 ❌ **不好的做法：** 一个通用的"dev-helper"智能体
 
 ### 2. 使用描述性名称
@@ -324,7 +324,7 @@ Result: Agent A and C respond, Agent B logs error
 **调试：**
 
 ```bash
-tail -f ~/.openclaw/logs/gateway.log | grep broadcast
+tail -f ~/.quantumcortex/logs/gateway.log | grep broadcast
 ```
 
 ### 只有一个智能体响应
@@ -379,7 +379,7 @@ tail -f ~/.openclaw/logs/gateway.log | grep broadcast
 }
 ```
 
-**用户发送：** 代码片段  
+**用户发送：** 代码片段
 **响应：**
 
 - code-formatter："修复了缩进并添加了类型提示"
